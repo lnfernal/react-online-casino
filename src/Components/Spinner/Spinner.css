@@ -1,0 +1,12 @@
+.start-button{
+    background-color: blue !important;
+    color: white !important;
+    padding: 10px 30px !important;
+    outline: 4px solid rgba(9,9,121,1) !important;
+    outline-offset: 3px;
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%) !important;
+    margin-top: 50px !important;
+}
+.css-c7bbhu-MuiPaper-root{
+    border: 3px solid #312E56 !important;
+}

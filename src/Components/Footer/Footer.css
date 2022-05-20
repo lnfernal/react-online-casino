@@ -1,0 +1,20 @@
+.footer-container{
+    background-color: #312E56;
+    width: 100%;
+    color: white;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+
+    
+   position:absolute;
+   bottom:0; 
+}
+.footer-content{
+    margin: 10px;
+    width: 100%;
+    text-align: center;
+}
+.link-button{
+    color: #F2A09F !important;
+}
