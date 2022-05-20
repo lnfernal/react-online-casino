@@ -1,5 +1,40 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.header-container{
+  background-color: #312E56;
+  width: 100%;
+  color: white;
+}
+
+.MuiDataGrid-cellCenter {
+  justify-content: center !important;
+}
+
+.content-container{
+  margin: 0 auto;
+  margin-top: 150px;
+  margin-bottom: 50px;
+  width: 70%;
+}
+
+.current-icon{
+  width: inherit;
+  height: 25%;
+  background: #733b3d;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper{
+  padding: 20px;
 }
 
 .App-logo {
