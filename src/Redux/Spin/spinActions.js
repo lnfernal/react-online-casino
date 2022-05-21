@@ -40,7 +40,7 @@ export const addBalance = (amt) => {
     return async (dispatch, getState) => {
         let balance = getState().spin.balance
         let balance_info = {
-            balance: amt,
+            balance: balance + amt,
         };
         console.log('added ', balance, balance_info)
         dispatch(updateBalanceSuccess(balance_info));

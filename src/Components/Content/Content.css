@@ -5,10 +5,10 @@
     /* outline: 4px solid rgba(9,9,121,1) !important; */
     outline-offset: 3px;
     /* background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%) !important; */
-    margin: 50px 10px 0 10px !important;
+    margin: 30px 10px 30px 10px !important;
 }
-.css-1xy1myn-MuiDataGrid-root {
-    height: 350px !important;
+.MuiDataGrid-root {
+    /* height: 400px !important; */
 }
 .content-container{
     height: fit-content;

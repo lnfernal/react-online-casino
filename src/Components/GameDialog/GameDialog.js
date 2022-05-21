@@ -32,7 +32,7 @@ const FormDialog = ({ openLogin, handleCloseLogin}) => {
   },[])
 
   React.useEffect(()=>{
-    console.log(gameBalance)
+    console.log('updated balance: ',gameBalance)
 
   },[gameBalance])
 
@@ -58,8 +58,8 @@ const FormDialog = ({ openLogin, handleCloseLogin}) => {
   const handleSpinClick = () =>{
     slotRes = []
     spinnerRef1.current.handleSpin()
-    setTimeout(function() { spinnerRef2.current.handleSpin() }, 1000);
-    setTimeout(function() { spinnerRef3.current.handleSpin() }, 2000);
+    setTimeout(function() { spinnerRef2.current.handleSpin() }, 2000);
+    setTimeout(function() { spinnerRef3.current.handleSpin() }, 4000);
   }
 
   const handleTestSpin = () => {
@@ -92,15 +92,22 @@ const FormDialog = ({ openLogin, handleCloseLogin}) => {
     }
   ]
   
+  var zzz = 0
 
   
   const handleCallback = (childData) =>{
     slotRes = [ ... slotRes, childData]
 
-    console.log('childData, ', childData)
-    console.log('Slot Res: ', slotRes)
+    // console.log('childData, ', childData)
+    // console.log('Slot Res: ', slotRes)
 
+
+    
     if(slotRes.length==3){
+      console.log('Slot Res: ', slotRes)
+      slotRes = slotRes.sort((a,b) => a.spinner - b.spinner).map(a => a.value);
+      console.log('Slot Res: ', slotRes)
+
       localStorage.setItem(count+1, JSON.stringify({
         id: count+1,
         slot1: icons.find(o => o.id === slotRes[0]).sign,
@@ -112,30 +119,36 @@ const FormDialog = ({ openLogin, handleCloseLogin}) => {
       
       count = count + 1
 
-      var temp = ''
-      
+      var temp = []
+
+
       if(slotRes.toString()===[0,0,0].toString()){
         console.log('Add $5')
-        // dispatch(addBalance(5));
-        setGameBalance(balanceRedux+5)
+        // // dispatch(addBalance(5));
+        // setGameBalance(balanceRedux+5-2)
+        zzz = zzz + 5 - 2
         sendAlert('success', 'Won $5')
       }
       else if(slotRes.toString()===[1,1,1].toString() || slotRes.toString()===[2,2,2].toString() || slotRes.toString()===[3,3,3].toString()){
         console.log('Add $2')
-        setGameBalance(balanceRedux+2)
+        // setGameBalance(balanceRedux+2-2)
+        zzz = zzz + 2 - 2
         sendAlert('success', 'Won $2')
       }
       else{
         temp = slotRes.filter((e, i, a) => a.indexOf(e) !== i)
         console.log(temp)
-        if(temp[0]!=''){
+        if(temp.length!=0){
           console.log('Add $0.5')
-          setGameBalance(balanceRedux+0.5)
+          // setGameBalance(balanceRedux+0.5-2)
+        zzz = zzz + 0.5 - 2
           sendAlert('success', 'Won $0.5')
         }
-        else if(temp==''){
+        else if(temp.length==0){
           console.log('remove $2')
-          setGameBalance(balanceRedux-2)
+          // setGameBalance(balanceRedux-2)
+          zzz = zzz + 0.5 - 2
+          sendAlert('warning', 'Won $0.5')
         }
       }
 
@@ -163,33 +176,33 @@ const FormDialog = ({ openLogin, handleCloseLogin}) => {
 
 
 
-  useEffect(()=>{
-    console.log('Slot Res: ', slotRes)
-  },[slotRes])
+  // useEffect(()=>{
+  //   console.log('Slot Res: ', slotRes)
+  // },[slotRes])
 
 return(
-      <Dialog open={openLogin} onClose={handleCloseLogin}>
+      <Dialog open={openLogin} onClose={() => handleCloseLogin(zzz)}>
         <DialogContent>
-          <Typography style={{marginBottom: '30px'}}>Balance: {gameBalance}</Typography>
+          {/* <Typography style={{marginBottom: '30px'}}>Balance: {zzz}</Typography> */}
             
     <Box sx={{ flexGrow: 1 }}>
     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
       <Grid item xs={4}>
         <Item>
           <div className='current-icon'></div>
-          <Spinner parentCallback = {handleCallback} ref={spinnerRef1} icons = {icons}  />
+          <Spinner parentCallback = {handleCallback} ref={spinnerRef1} icons = {icons} spinner={1} />
         </Item>
       </Grid>
       <Grid item xs={4}>
         <Item>
           <div className='current-icon'></div>
-          <Spinner parentCallback = {handleCallback} ref={spinnerRef2} icons = {icons}  />
+          <Spinner parentCallback = {handleCallback} ref={spinnerRef2} icons = {icons} spinner={2} />
         </Item>
       </Grid>
       <Grid item xs={4}>
         <Item>
           <div className='current-icon'></div>
-          <Spinner parentCallback = {handleCallback} ref={spinnerRef3} icons = {icons}  />
+          <Spinner parentCallback = {handleCallback} ref={spinnerRef3} icons = {icons} spinner={3} />
         </Item>
       </Grid>
 
@@ -202,7 +215,7 @@ return(
         <DialogActions style={{position: 'relative', margin: '0 auto'}}>
           <Button className='content-button' onClick={handleSpinClick} >Spin</Button>
           <Button className='content-button' onClick={handleTestSpin}>Test Spin</Button>
-          <Button className='content-button' onClick={() => handleCloseLogin(gameBalance)}>Close</Button>
+          <Button className='content-button' onClick={() => handleCloseLogin(zzz)}>Close</Button>
         </DialogActions>
       </Dialog>
     )

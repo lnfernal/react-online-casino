@@ -20,16 +20,36 @@ export default class AutoPlayMethods extends Component {
   pause(currentSlide) {
     this.slider.slickPause();
     var res = currentSlide.pop()
-    console.log(res)
-    if(res==3){ this.props.parentCallback(0) }
+    // console.log(res)
+    if(res==2){ this.props.parentCallback({
+      value: 0,
+      res: res,
+      spinner: this.props.spinner
+    }) }
+    else if(res==3){ this.props.parentCallback({
+      value: 1,
+      res: res,
+      spinner: this.props.spinner
+    }) }
     else{
-      this.props.parentCallback(res+1)
+      this.props.parentCallback({
+        value: res+2,
+        res: res,
+        spinner: this.props.spinner
+      })
     }
+    
+    // this.props.parentCallback({
+    //   value: res,
+    //   spinner: this.props.spinner
+    // })
 
   }
   handleSpin(){
     this.play();
-    setTimeout(() => this.pauseRef.current.click(), Math.floor((Math.random()*3000) + 1500)); 
+    // setTimeout(() => this.pauseRef.current.click(), Math.floor((Math.random()*3000) + 1500)); 
+    setTimeout(() => this.pauseRef.current.click(), 2000); 
+
   }
 
   runTestCase(){
@@ -43,7 +63,7 @@ export default class AutoPlayMethods extends Component {
 
       autoplay: false,
       autoplaySpeed: 100,
-      speed: 10,
+      speed: 100,
       arrows: false,
       
       dots: false,

@@ -9,6 +9,7 @@ import { addBalance } from '../../Redux';
 import { useDispatch, useSelector } from 'react-redux';
 
 
+
 const columns = [
   { field: 'id', headerName: 'ID', width: 70, flex: 1, align: 'center', headerAlign: 'center' },
   { field: 'slot1', headerName: 'Slot 1', width: 130, flex: 1, align: 'center', headerAlign: 'center', sortable: false },
@@ -46,6 +47,7 @@ export default function DataTable() {
   };
 
   const handleCloseGame = (gameBalance) => {
+    console.log('used balance: ', gameBalance)
     dispatch(addBalance(gameBalance));
     setOpenGame(false);
     handleRefreshData()
@@ -75,7 +77,7 @@ export default function DataTable() {
 
   
   React.useEffect(()=>{
-    console.log('Current Balance at start: ', balanceRedux)
+    // console.log('Current Balance at start: ', balanceRedux)
     handleRefreshData()
   },[])
 
@@ -90,6 +92,8 @@ export default function DataTable() {
         disableColumnSelector={true}
         disableColumnFilter={true}
         key={key}
+        
+        autoHeight={true}
       />
       <span style={{opacity: '1'}} onClick={handleRefreshData}></span>
       <Button className='start-button' onClick={handleClickOpenGame}>Start a Game</Button>

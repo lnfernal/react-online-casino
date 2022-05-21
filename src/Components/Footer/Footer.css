@@ -7,8 +7,11 @@
     flex-direction: row;
 
     
-   position:absolute;
-   bottom:0; 
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
 }
 .footer-content{
     margin: 10px;
@@ -17,4 +20,5 @@
 }
 .link-button{
     color: #F2A09F !important;
+    margin: 5px 10px;
 }
